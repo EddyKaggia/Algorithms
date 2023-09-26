@@ -16,7 +16,7 @@ const maxDepth = (root) => {
     let left = maxDepth(root.left), right = maxDepth(root.right);
     if(Math.abs(left - right)) res = false;
 
-    return 1 + Math.max(left, right);
+    return 1 + Math.mx(left, right);
 
 };
 

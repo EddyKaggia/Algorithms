@@ -10,8 +10,8 @@ let containsDuplicate = function(nums) {
     }
     return false;
 
-    //Space: 0(n) scale linearly as array grows due to more elemnts in array
-    //time complexity: 0(n) due to numbr of elements in array
+    //Space: 0(n) scale linearly as array grows due to more elements in array
+    //time complexity: 0(n) due to number of elements in array
 };
 
 console.log(containsDuplicate([1,2,3,1]));
