@@ -12,13 +12,16 @@ function maxSubarraySum(nums) {
   
     for (let i = 1; i < nums.length; i++) {
       maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]);
+      console.log(maxEndingHere);
       maxSoFar = Math.max(maxSoFar, maxEndingHere);
+      console.log(maxSoFar);
     }
   
     return maxSoFar;
   }
   
   const nums = [-2,1,-3,4,-1,2,1,-5,4];
+  // const nums = [5,4,-1,7,8];
   const maxSum = maxSubarraySum(nums);
   console.log(maxSum); // 6
   

@@ -52,6 +52,7 @@ function twoSum(nums, target) {
 
         // Calculate its complement by subtracting it from the target. Let's call this value complement.
       const complement = target - nums[i];
+      console.log(complement)
       // Check if the complement is already in the map object by calling the has method. If it is, we've found a pair of elements that add up to the target, so we return their indices as an array.
       if (map.has(complement)) {
         return [map.get(complement), i]; // Return the indices of the two elements

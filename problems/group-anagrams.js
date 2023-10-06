@@ -4,6 +4,7 @@
 
 var groupAnagrams = function(strs) {
     const sortedStrs = strs.map(word => word.split('').sort().join(''));
+    console.log(sortedStrs);
     const hash = {};
 
     for (let i = 0; i < strs.length; i++) {
@@ -17,3 +18,6 @@ return Object.values(hash);
 //Time complexity: O(n x nlogn)
 //Space complexity: O(n)
 };
+
+const strs = ["eat","tea","tan","ate","nat","bat"];
+console.log(groupAnagrams(strs));

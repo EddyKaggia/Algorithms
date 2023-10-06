@@ -13,26 +13,49 @@
 
 //Kind of like a greedy approach
 //2 auxillary arrays to hold all product-sums one side and products to the other side of index
-var productExceptSelf = function(nums) { 
+// var productExceptSelf = function(nums) { 
 
-    const left = new Array(nums.length).fill(0);
-    left[0] = 1;
-    const right = new Array(nums.length).fill(0);
-    right[right.length - 1] = 1;
+//     const left = new Array(nums.length).fill(0);
+//     left[0] = 1;
+//     const right = new Array(nums.length).fill(0);
+//     right[right.length - 1] = 1;
 
-    for(let i = 1; i < nums.length; i++){
-        left[i] = left[i - 1] * nums[i - 1]; 
-    }
+//     for(let i = 1; i < nums.length; i++){
+//         left[i] = left[i - 1] * nums[i - 1]; 
+//     }
 
-    for(let i = right.length - 2; i >= 0; i--){
-        right[i] = right[i + 1] * nums[i + 1];
-    }
+//     for(let i = right.length - 2; i >= 0; i--){
+//         right[i] = right[i + 1] * nums[i + 1];
+//     }
 
-    for(let i =0; i < nums.length; i++){
-        nums[i] = left[i] * right[i];
-    }
-    return nums;
-};
+//     for(let i =0; i < nums.length; i++){
+//         nums[i] = left[i] * right[i];
+//     }
+//     return nums;
+// };
 
 //O(n): T
 //O(n):S
+
+const productExceptSelf = (nums) => {
+    let result = [];
+
+    let start = 1;
+
+    for (let i = 0; i < nums.length; i++) {
+        result.push(start);
+        start = start * nums[i];
+    }
+
+    let start2 = 1;
+
+    for (let i = nums.length - 1; i >= 0; i--) {
+        result[i] = start2 * result[i];
+        start2 = start2 * nums[i];
+        console.log(start2)
+    }
+
+    return result;
+}
+
+console.log(productExceptSelf([1,2,3,4])); // [24,12,8,6]
