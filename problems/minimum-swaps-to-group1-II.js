@@ -37,49 +37,42 @@ Thus, the minimum number of swaps required is 0.
 */
 
 const minSwaps = (nums) => {
-    //count the 1s
-    let oneCount = 0;
+  const num1s = nums.reduce(function (sum, num) {
+    if (num === 1) sum++;
+    return sum;
+  }, 0);
 
-    for (const one of nums) oneCount += one;
+  console.log(num1s);
 
-    //If there are no 1s or only one 1 no need to swap
-    if (oneCount <= 1) return 0;
+  let num1sInWindow = 0;
+  let minSwaps = 0;
 
-    let right = 0;
-    let left = 0;
-    let maxOnes = 0;
-    let windowOnes = 0;
+  for (let i = 0; i < nums.length + num1s; i++) {
+    const index = i >= nums.length ? i - nums.length : i;
+    const number = nums[index];
 
-    //Window within which ones fit: maxOnes
-    while (right < oneCount) {
-        if (nums[right] === 1) {
-            windowOnes++;
-        }
-        right++
+    if (number === 1) {
+      num1sInWindow++;
     }
 
-    maxOnes = windowOnes;
-
-    //
-    while (right < nums.length) {
-        if (nums[left] === 1) {
-            windowOnes--; 
-        }
-        if (nums[right] === 1) {
-            windowOnes++;
-        }
-
-        maxOnes = Math.max(maxOnes, windowOnes);
-
-        left++;
-        right++;
+    if (i <= num1s - 1) {
+      minSwaps = num1s - num1sInWindow;
+      continue;
     }
 
-    console.log(left)
+    const headIndex =
+      index - num1s >= 0 ? index - num1s : nums.length + (index - num1s);
 
-    return oneCount - maxOnes;
-}
+    if (nums[headIndex] === 1) {
+      num1sInWindow--;
+    }
 
-console.log(minSwaps([0,1,0,1,1,0,0])); // 1
-console.log(minSwaps([0,1,1,1,0,0,1,1,0])); // 2
-console.log(minSwaps([1,1,0,0,1])); //0
+    minSwaps = Math.min(minSwaps, num1s - num1sInWindow);
+  }
+
+  return minSwaps;
+};
+
+// console.log(minSwaps([0, 1, 0, 1, 1, 0, 0])); // 1
+console.log(minSwaps([0, 1, 1, 1, 0, 0, 1, 1, 0])); // 2
+// console.log(minSwaps([1, 1, 0, 0, 1])); //0
