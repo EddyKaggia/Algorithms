@@ -10,22 +10,20 @@ In our code editor, we've created two nodes, Kitten and Puppy, and we've manuall
 Create a Cat and Dog node and manually add them to the line.
 */
 
-const Node = function(element) {
-    this.element = element;
-    this.next = null;
-  };
-  const Kitten = new Node('Kitten');
-  const Puppy = new Node('Puppy');
-  
-  Kitten.next = Puppy;
-  // Only change code below this line
-  const Cat = new Node('Cat');
-  const Dog = new Node('Dog');
+const Node = function (element) {
+  this.element = element;
+  this.next = null;
+};
+const Kitten = new Node("Kitten");
+const Puppy = new Node("Puppy");
 
-  
-  Puppy.next = Cat;
-  Cat.next = Dog;
+Kitten.next = Puppy;
+// Only change code below this line
+const Cat = new Node("Cat");
+const Dog = new Node("Dog");
 
+Puppy.next = Cat;
+Cat.next = Dog;
 
 /*
 CREATE A LINKED LIST CLASS
@@ -49,20 +47,20 @@ function LinkedList() {
   const length = 0;
   const head = null;
 
-  const Node = function(element){
+  const Node = function (element) {
     this.element = element;
     this.next = null;
   };
 
-  this.head = function(){
+  this.head = function () {
     return head;
   };
 
-  this.size = function(){
+  this.size = function () {
     return length;
   };
 
-  this.add = function(element){
+  this.add = function (element) {
     // Only change code below this line
     const node = new Node(element);
     if (head) {
@@ -71,22 +69,21 @@ function LinkedList() {
         current = current.next;
       }
       current.next = node;
-    }
-    else {
+    } else {
       head = node;
     }
     length++;
     // Only change code above this line
   };
 
-  this.remove = function(element){
+  this.remove = function (element) {
     // Only change code below this line
     const currentNode = head;
     let previousNode;
-    if(currentNode.element === element){
+    if (currentNode.element === element) {
       head = currentNode.next;
     } else {
-      while(currentNode.element !== element) {
+      while (currentNode.element !== element) {
         previousNode = currentNode;
         currentNode = currentNode.next;
       }
@@ -94,45 +91,50 @@ function LinkedList() {
       previousNode.next = currentNode.next;
     }
 
-    length --;
+    length--;
     // Only change code above this line
   };
 
-  this.isEmpty = function() {
+  this.isEmpty = function () {
     return this.size() > 0 ? false : true;
   };
 
-  this.indexOf = function(el) {
-    let currentNode = head, index = -1, indexFound = false;
+  this.indexOf = function (el) {
+    let currentNode = head,
+      index = -1,
+      indexFound = false;
 
     while (!indexFound && currentNode) {
       index++;
-      if(currentNode.element === el) {
+      if (currentNode.element === el) {
         indexFound = true;
       }
       currentNode = currentNode.next;
-    } 
+    }
 
     return indexFound ? index : -1;
   };
 
-  this.elementAt = function(i) {
-    let currentNode = head, currentElement, index = -1, indexReached = false;
+  this.elementAt = function (i) {
+    let currentNode = head,
+      currentElement,
+      index = -1,
+      indexReached = false;
 
     while (!indexReached && currentNode) {
       index++;
       currentElement = currentNode.element;
-      if(index === i) {
+      if (index === i) {
         indexReached = true;
       }
       currentNode = currentNode.next;
-    } 
+    }
 
     return indexReached ? currentElement : undefined;
-  }
+  };
 
   // Only change code below this line
-  this.removeAt = function(index) {
+  this.removeAt = function (index) {
     // Exit early on bad input
     if (index < 0 || index >= length) {
       return null;
@@ -143,47 +145,47 @@ function LinkedList() {
     if (index == 0) {
       head = null;
     } else {
-      let currentNode  = head;
+      let currentNode = head;
       let currentIndex = 0;
       while (currentIndex < index - 1) {
         currentNode = currentNode.next;
         currentIndex++;
       }
-      deletedNode      = currentNode.next;
+      deletedNode = currentNode.next;
       currentNode.next = deletedNode.next;
     }
 
     // Update and return
     length--;
     return deletedNode.element;
-  }
+  };
   // Only change code above this line
 
-    // Only change code below this line
-    this.addAt = (index, element) => {
-      if (index < 0 || index >= length) {
-        return false;
+  // Only change code below this line
+  this.addAt = (index, element) => {
+    if (index < 0 || index >= length) {
+      return false;
+    }
+
+    let node = head;
+    if (index > 0) {
+      let i = 0;
+      while (i + 1 !== index) {
+        node = node.next;
+        i++;
       }
-  
-      let node = head;
-      if (index > 0) {
-        let i = 0;
-        while (i + 1 !== index) {
-          node = node.next;
-          i++;
-        }
-      }
-  
-      const newNode = new Node(element);
-      newNode.next = node.next;
-  
-      if (index === 0) {
-        head = newNode;
-      } else {
-        node.next = newNode;
-      }
-  
-      length++;
-    };
-    // Only change code above this line
+    }
+
+    const newNode = new Node(element);
+    newNode.next = node.next;
+
+    if (index === 0) {
+      head = newNode;
+    } else {
+      node.next = newNode;
+    }
+
+    length++;
+  };
+  // Only change code above this line
 }
