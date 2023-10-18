@@ -17,7 +17,7 @@ Explanation: "leeto" did not occur in "leetcode", so we return -1.
 */
 
 const strStr = (haystack, needle) => {
-      // Use indexOf to find the first occurrence of needle in haystack
+  // Use indexOf to find the first occurrence of needle in haystack
   const index = haystack.indexOf(needle);
 
   // Check if the index is -1 (not found) or a positive integer (found)
@@ -26,37 +26,55 @@ const strStr = (haystack, needle) => {
   } else {
     return index; // Found needle at the given index
   }
-}
+};
 
 function strStr2(haystack, needle) {
-    const haystackLength = haystack.length;
-    const needleLength = needle.length;
-  
-    // If needle is an empty string, return 0
-    if (needleLength === 0) {
-      return 0;
-    }
-  
-    for (let i = 0; i <= haystackLength - needleLength; i++) {
-      // Check if the current substring of haystack matches needle
-      let match = true;
-      for (let j = 0; j < needleLength; j++) {
-        if (haystack[i + j] !== needle[j]) {
-          match = false;
-          break;
-        }
-      }
-  
-      // If a match is found, return the starting index
-      if (match) {
-        return i;
-      }
-    }
-  
-    // If no match is found, return -1
-    return -1;
+  const haystackLength = haystack.length;
+  const needleLength = needle.length;
+
+  // If needle is an empty string, return 0
+  if (needleLength === 0) {
+    return 0;
   }
 
-console.log(strStr2("sadbutsad", "sad"));// 0
-console.log(strStr2("leetcode", "leeto"));// -1
-console.log(strStr2("egwene", "wen"));
+  for (let i = 0; i <= haystackLength - needleLength; i++) {
+    // Check if the current substring of haystack matches needle
+    let match = true;
+    for (let j = 0; j < needleLength; j++) {
+      if (haystack[i + j] !== needle[j]) {
+        match = false;
+        break;
+      }
+    }
+
+    // If a match is found, return the starting index
+    if (match) {
+      return i;
+    }
+  }
+
+  // If no match is found, return -1
+  return -1;
+}
+
+const strStr3 = (haystack, needle) => {
+  if (!needle.length) return -1;
+
+  let left = 0;
+  let right = left + needle.length - 1;
+
+  console.log(haystack.slice(left, right + 1));
+
+  while (right < haystack.length) {
+    if (needle === haystack.slice(left, right + 1)) {
+      return left;
+    }
+    left++;
+    right++;
+  }
+  return -1;
+};
+
+console.log(strStr3("sadbutsad", "sad")); // 0
+console.log(strStr3("leetcode", "leeto")); // -1
+console.log(strStr3("egwene", "wen"));
