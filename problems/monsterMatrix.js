@@ -85,41 +85,67 @@ const player_position = (board) => {
   //Use two variables to hold teh position of the element
   let row = 0;
   let column = 0;
-  
+
   //Iterate over the input array
-  for (let i = 0; i <board.length; i++) {
+  for (let i = 0; i < board.length; i++) {
     //Iterate over each individual array
     for (let j = 0; j < board[i].length; j++) {
-      if (board[i][j] === 'P') {
+      if (board[i][j] === "P") {
         row = i;
         column = j;
       }
     }
   }
   return [row, column];
+};
+
+function detect(board) {
+  const r = board.length;
+  if (r === 0) return null;
+
+  const c = board[0].length;
+  let playerRow = -1;
+  let playerCol = -1;
+  let minDistance = r + c; // Initialize to maximum possible distance
+
+  for (let row = 0; row < r; row++) {
+    for (let col = 0; col < c; col++) {
+      if (board[row][col] === "P") {
+        playerRow = row;
+        playerCol = col;
+      } else if (board[row][col] === "M") {
+        // Calculate distance to this monster horizontally and vertically
+        const distance = Math.abs(playerRow - row) + Math.abs(playerCol - col);
+        minDistance = Math.min(minDistance, distance);
+      }
+    }
+  }
+  console.log(minDistance);
+  return [playerRow, playerCol], minDistance;
 }
 
-
 const board1 = [
-  ['-', '-', '-', 'M', '-', '-'],
-  ['-', '-', '-', '-', 'M', '-'],
-  ['-', 'M', '-', 'P', '-', '-'],
-  ['M', '-', '-', '-', '-', '-'],
-  ['-', 'M', '-', '-', '-', '-'],
+  ["-", "-", "-", "M", "-", "-"],
+  ["-", "-", "-", "-", "M", "-"],
+  ["-", "M", "-", "P", "-", "-"],
+  ["M", "-", "-", "-", "-", "-"],
+  ["-", "M", "-", "-", "-", "-"],
 ];
 // returns (2,3), 1
 
+console.log(detect(board1));
+
 const board2 = [
-  ['P', '-', '-', '-', '-', '-'],
-  ['-', '-', 'M', '-', 'M', '-'],
-  ['-', '-', '-', '-', '-', '-'],
-  ['M', '-', '-', 'M', '-', '-'],
-  ['-', 'M', '-', '-', '-', '-'],
+  ["P", "-", "-", "-", "-", "-"],
+  ["-", "-", "M", "-", "M", "-"],
+  ["-", "-", "-", "-", "-", "-"],
+  ["M", "-", "-", "M", "-", "-"],
+  ["-", "M", "-", "-", "-", "-"],
 ];
 // returns (0,0), 2
 
 const board3 = [
-  ['M', 'M', 'M'],
-  ['-', '-', 'P'],
+  ["M", "M", "M"],
+  ["-", "-", "P"],
 ];
 // returns (1,2), 0
