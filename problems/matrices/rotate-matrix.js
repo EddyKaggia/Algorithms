@@ -3,7 +3,7 @@ Given an image represented by an N X N matrix, where each pixel in the image is 
 */
 
 /*
-I: nxn matrix
+I: nxn matrix | Square matrix
 O: rotated matrix 90 deg clockwise
 C: rotate matrix in place, optimize
 E: Empty matrix, even and odd values of n
@@ -12,15 +12,21 @@ E: Empty matrix, even and odd values of n
 function rotateMatrix(matrix) {
   const n = matrix.length;
 
+  //Layer reps each layer/level/ROWS of teh matrix. Only halfway iteration to prevent 360deg rotation
   for (let layer = 0; layer < Math.floor(n / 2); layer++) {
+    //First and last indices
     const first = layer;
     const last = n - 1 - layer;
 
+    //Iterate through each layer COLUMNS
     for (let i = first; i < last; i++) {
+      //The offset identifies the corresponding elements that need to be swapped
       const offset = i - first;
+      console.log(offset);
 
       // Save the top element
       const top = matrix[first][i];
+      console.log(top);
 
       // Move left to top
       matrix[first][i] = matrix[last - offset][first];
