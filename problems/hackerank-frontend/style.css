@@ -1,0 +1,50 @@
+body {
+  display: flex;
+}
+
+.left {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 1;
+  background-color: #e1e1e1;
+  padding: 20px;
+}
+
+.content {
+  flex: 3;
+  display: flex;
+}
+
+.sidebar {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.article {
+  flex: 3;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+.footer {
+  flex: 1;
+  background-color: #e1e1e1;
+  padding: 20px;
+}
+
+.aside {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
