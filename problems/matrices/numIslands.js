@@ -63,12 +63,8 @@ const numIslandsDFS = (grid) => {
   return count;
 };
 
-const numIslandsBFS = (grid) => {
-  if (!grid || grid.length === 0) return 0;
-};
-
 console.log(
-  numIslands([
+  numIslandsBFS([
     ["1", "1", "1", "1", "0"],
     ["1", "1", "0", "1", "0"],
     ["1", "1", "0", "0", "0"],
@@ -76,7 +72,7 @@ console.log(
   ])
 ); // 1
 console.log(
-  numIslands([
+  numIslandsBFS([
     ["1", "1", "0", "0", "0"],
     ["1", "1", "0", "0", "0"],
     ["0", "0", "1", "0", "0"],
