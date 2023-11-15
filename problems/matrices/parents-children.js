@@ -287,6 +287,7 @@ const findEarliestAncestor = (pairs, individual) => {
   // Perform DFS starting from the given individual
   const result = dfs(individual);
 
+  console.log(graph);
   // If there are no parents, return null
   if (result.length === 1 && result[0] === individual) {
     return null;

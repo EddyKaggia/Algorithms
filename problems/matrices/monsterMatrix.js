@@ -100,28 +100,46 @@ const player_position = (board) => {
 };
 
 function detect(board) {
-  const r = board.length;
-  if (r === 0) return null;
-
-  const c = board[0].length;
+  // Variables to store the player's location
   let playerRow = -1;
   let playerCol = -1;
-  let minDistance = r + c; // Initialize to maximum possible distance
 
-  for (let row = 0; row < r; row++) {
-    for (let col = 0; col < c; col++) {
-      if (board[row][col] === "P") {
-        playerRow = row;
-        playerCol = col;
-      } else if (board[row][col] === "M") {
-        // Calculate distance to this monster horizontally and vertically
-        const distance = Math.abs(playerRow - row) + Math.abs(playerCol - col);
-        minDistance = Math.min(minDistance, distance);
+  // Find the player's location
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] === "P") {
+        playerRow = i;
+        playerCol = j;
+        break;
       }
     }
+    if (playerRow !== -1) {
+      break;
+    }
   }
-  console.log(minDistance);
-  return [playerRow, playerCol], minDistance;
+
+  // Variables to store the minimum distance to a scary monster
+  let minDistance = Infinity;
+
+  // Check horizontally for scary monsters
+  for (let i = 0; i < board.length; i++) {
+    if (board[i][playerCol] === "M") {
+      minDistance = Math.min(minDistance, Math.abs(playerRow - i));
+    }
+  }
+
+  // Check vertically for scary monsters
+  for (let j = 0; j < board[playerRow].length; j++) {
+    if (board[playerRow][j] === "M") {
+      minDistance = Math.min(minDistance, Math.abs(playerCol - j));
+    }
+  }
+
+  // Return the player's location and the minimum distance
+  return {
+    playerLocation: { row: playerRow, col: playerCol },
+    minDistance: minDistance - 1,
+  };
 }
 
 const board1 = [
@@ -143,9 +161,11 @@ const board2 = [
   ["-", "M", "-", "-", "-", "-"],
 ];
 // returns (0,0), 2
+console.log(detect(board2));
 
 const board3 = [
   ["M", "M", "M"],
   ["-", "-", "P"],
 ];
 // returns (1,2), 0
+console.log(detect(board3));
