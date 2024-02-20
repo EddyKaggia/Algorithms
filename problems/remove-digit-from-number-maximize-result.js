@@ -23,21 +23,22 @@ Explanation: We can remove either the first or second '5' from "551".
 Both result in the string "51".
 */
 
+//Create a function labelled removeDigit
+//Inputs: 2 strings -> Number and Digit
 const removeDigit = function (number, digit) {
-  let result = "";
-  let removed = false;
-
-  for (const char in number) {
-    if (char == digit && !removed) {
-      removed = true;
-    } else {
-      result += char;
+  let max = "";
+  for (let i = 0; i < number.length; i++) {
+    if (number[i] === digit) {
+      let temp = number.slice(0, i) + number.slice(i + 1);
+      if (temp > max) {
+        max = temp;
+      }
     }
   }
-
-  return result;
+  return max;
 };
 
-console.log(removeDigit("123", "3"));
+console.log(removeDigit("3123", "3"));
 console.log(removeDigit("1231", "1"));
 console.log(removeDigit("551", "5"));
+console.log(removeDigit("5515515", "5"));
