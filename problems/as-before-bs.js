@@ -26,15 +26,16 @@ There are no 'a's, hence, every 'a' appears before every 'b' and we return true.
 */
 
 const checkString = (s) => {
-  let aExists = true;
-  for (char of s) {
-    if (char === "a") {
-      aExists = false;
-    }
+  let foundB = false;
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    if (char === "b") foundB = true;
+    else if (foundB) return false;
   }
-  return aExists;
+
+  return true;
 };
 
-// console.log(checkString("aaabbb"));
-// console.log(checkString("abab"));
+console.log(checkString("aaabbb"));
+console.log(checkString("abab"));
 console.log(checkString("bbb"));
