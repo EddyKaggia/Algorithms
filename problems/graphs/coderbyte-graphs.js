@@ -22,17 +22,22 @@ const edges = [
   ["A", "D"],
   ["B", "C"],
   ["C", "D"],
-  ["C", "D"],
   ["C", "E"],
   ["D", "E"],
 ];
 
+// 1) FIND ADJACENT NODES
+
 const findAdjacentNodes = function (node) {
+  // Output array
   const adjacentNodes = [];
 
+  // Loop through edges array
   for (const [first, second] of edges) {
+    // If first elem in subarray push second into output array
     if (first === node) {
       adjacentNodes.push(second);
+      // If second elem in subarray push first into output array
     } else if (second === node) {
       adjacentNodes.push(first);
     }
