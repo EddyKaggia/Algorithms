@@ -123,3 +123,61 @@ console.log(isConnected2("A", "B")); //True
 console.log(isConnected2("A", "E")); //False
 console.log(isConnected2("C", "D")); //True
 console.log(isConnected2("C", "A")); //False
+
+// ADJACENCY LIST
+
+// TC to find adjacent nodes: O(1)
+// TC to check if two nodes are connected: O(log v) if each adjacent row is sorted
+// SC: O(e)
+
+// Node Class
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.edgesList = [];
+  }
+
+  connected(node) {
+    this.edgesList.push(node);
+    node.edgesList.push(this);
+  }
+
+  adjacentNodes() {
+    return this.edgesList.map((edge) => edge.value);
+  }
+
+  isConnected(node) {
+    return this.edgesList.includes(node);
+  }
+}
+
+//Graph Class
+
+class Graph {
+  constructor(nodes) {
+    this.nodes = [...nodes];
+  }
+
+  addToGraph(node) {
+    this.nodes.push(node);
+  }
+}
+
+const nodeA = new Node("A");
+const nodeB = new Node("B");
+const nodeC = new Node("C");
+const nodeD = new Node("D");
+const nodeE = new Node("E");
+
+nodeA.connected(nodeB);
+nodeA.connected(nodeD);
+nodeC.connected(nodeB);
+nodeC.connected(nodeD);
+nodeC.connected(nodeE);
+nodeE.connected(nodeD);
+
+const graph = new Graph([nodeA, nodeB, nodeC, nodeD, nodeE]);
+
+console.log(nodeC.adjacentNodes());
+console.log(nodeC.isConnected(nodeE));
