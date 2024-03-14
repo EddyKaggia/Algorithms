@@ -1,7 +1,7 @@
 // BREADTH-FIRST TRAVERSAL/ BREADTH-FIRST SEARCH
 
-// Traverses broad into the data structure by visiting neighbor nodes before children nodes
-// Uses a queue data structure
+// Traverses BROADLY into the data structure by visiting neighbor nodes before children nodes
+// Uses a QUEUE data structure
 
 // BIG O
 // TC: O(v + e) -> v is the number of vertices and e is the number of edges
