@@ -8,7 +8,37 @@ To perform a flood fill, consider the starting pixel, plus any pixels connected 
 Return the modified image after performing the flood fill.
 */
 
-const floodFill = (image, sr, sc, color) => {};
+const defaults = require("pg/lib/defaults");
+
+const floodFill = (image, sr, sc, color) => {
+  const rows = image.length;
+  const cols = image[0].length;
+  const originalColor = image[sr][sc];
+
+  if (originalColor === color) return image;
+
+  const dfs = (r, c) => {
+    if (
+      r < 0 ||
+      r >= rows ||
+      c < 0 ||
+      c >= cols ||
+      image[r][c] !== originalColor
+    )
+      return;
+
+    image[r][c] = color;
+
+    dfs(r + 1, c);
+    dfs(r - 1, c);
+    dfs(r, c + 1);
+    dfs(r, c - 1);
+  };
+
+  dfs(sr, sc);
+
+  return image;
+};
 
 console.log(
   floodFill(
